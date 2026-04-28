@@ -1,3 +1,5 @@
+
+
 ```html
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -122,38 +124,7 @@
             border-color: var(--primary-accent);
         }
 
-        .card.dragging { opacity: 0.4; }
 
-        .card-actions {
-            position: absolute; right: 20px; top: 20px;
-            display: flex; gap: 8px; opacity: 0; transition: 0.3s;
-            align-items: center;
-        }
-        .card:hover .card-actions { opacity: 1; }
-
-        .drag-handle {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 28px;
-            height: 28px;
-            border-radius: 12px;
-            background: rgba(0,0,0,0.05);
-            cursor: grab;
-            user-select: none;
-            font-size: 14px;
-        }
-        .drag-handle:active {
-            cursor: grabbing;
-        }
-        
-        .btn-action {
-            background: rgba(0,0,0,0.05);
-            border: none; color: var(--text-main); padding: 6px 12px;
-            border-radius: 14px; cursor: pointer; font-size: 11px;
-            font-weight: 500; transition: 0.2s;
-        }
-        .btn-del:hover { background: #ff3b30; color: white; }
 
         .exp-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
         .exp-title { font-size: 1.4rem; font-weight: 600; }
@@ -172,15 +143,15 @@
         /* 个人信息 */
         .hero { display: flex; gap: 50px; align-items: center; padding: 20px 0; width: 100%; }
         .avatar-container {
-            width: 180px; height: 180px; flex-shrink: 0;
+            width: 220px; height: 220px; flex-shrink: 0;
             border-radius: 50%; background: #fff;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border: 4px solid #fff; overflow: hidden; cursor: pointer;
+            border: 4px solid #fff; overflow: hidden;
             display: flex; align-items: center; justify-content: center;
             transition: var(--transition-smooth);
         }
         .avatar-container:hover { transform: scale(1.05); }
-        .avatar-container img { width: 100%; height: 100%; object-fit: cover; display: none; }
+        .avatar-container img { width: 100%; height: 100%; object-fit: cover; }
 
         /* 作品集 */
         .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; width: 100%; }
@@ -189,44 +160,7 @@
             justify-content: space-between; padding: 25px; 
         }
 
-        .list-container.drag-over,
-        .portfolio-grid.drag-over { outline: 2px dashed rgba(0,113,227,0.35); }
-
-        /* 管理面板 */
-        .admin-controls {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(20px);
-            padding: 10px 25px; border-radius: 40px;
-            display: flex; align-items: center; gap: 20px;
-            border: 1px solid rgba(0,0,0,0.05);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            z-index: 2000;
-            flex-wrap: wrap;
-        }
-        .text-controls { display: flex; align-items: center; gap: 8px; }
-        .text-controls input {
-            width: 60px;
-            border: 1px solid rgba(0,0,0,0.12);
-            border-radius: 12px;
-            padding: 4px 10px;
-            outline: none;
-        }
-        .text-controls button { font-size: 12px; }
-
-        .btn-plus {
-            background: var(--primary-accent); color: white; border: none;
-            padding: 8px 20px; border-radius: 20px; font-weight: 600;
-            cursor: pointer; font-size: 13px; transition: 0.3s;
-        }
-
-        #status-toast {
-            position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
-            background: #1d1d1f; color: white; padding: 6px 16px;
-            border-radius: 20px; font-size: 11px; opacity: 0; transition: 0.3s; pointer-events: none; z-index: 3000;
-        }
-
-        @media (max-width: 768px) {
+        /* 作品集 */
             .hero { flex-direction: column; text-align: center; }
             .section-header { font-size: 2.2rem; }
             .nav-links { display: none; }
@@ -257,20 +191,16 @@
     <section id="intro">
         <div class="reveal-content">
             <div class="hero">
-                <div class="avatar-container" onclick="document.getElementById('upload-input').click()">
-                    <img id="avatar-img" src="" alt="冯愉">
-                    <div id="upload-hint" style="text-align: center; color: var(--text-secondary); font-size: 13px;">
-                        <i data-lucide="user" size="32"></i><br>点击上传照片
-                    </div>
-                    <input type="file" id="upload-input" hidden accept="image/*" onchange="processPhoto(this)">
+                <div class="avatar-container">
+                    <img src="assets/images/avatar.jpg" alt="冯愉的头像">
                 </div>
                 <div class="hero-content">
-                    <h1 contenteditable="true" style="font-size: 3.5rem; font-weight: 700; letter-spacing: -0.04em;">冯愉</h1>
-                    <p contenteditable="true" style="color: var(--text-secondary); font-size: 1.4rem; font-weight: 500; margin-bottom: 20px;">
-                        香港中文大学 · 社会学研究生候选人
+                    <h1 style="font-size: 3.5rem; font-weight: 700; letter-spacing: -0.04em;">冯愉</h1>
+                    <p style="color: var(--text-secondary); font-size: 1.4rem; font-weight: 500; margin-bottom: 20px;">
+                        立即到岗 | 一周五天出勤 | 实习六个月以上 | 已交留位费，开学后可继续实习
                     </p>
-                    <div contenteditable="true" style="display: flex; gap: 15px; font-size: 0.9rem; font-weight: 500; color: var(--primary-accent);">
-                        <span>📞 17827300406</span>
+                    <div style="display: flex; gap: 15px; font-size: 0.9rem; font-weight: 500; color: var(--primary-accent);">
+                        <span>📞 (+86) 17827300406</span>
                         <span>📧 felicia.von@qq.com</span>
                         <span>💬 FeliciaOuO</span>
                     </div>
@@ -278,17 +208,17 @@
             </div>
             <div class="list-container">
                 <div class="card">
-                    <div class="card-actions">
-                        <span class="drag-handle" title="拖动调整顺序">⋮</span>
-                        <button class="btn-action btn-del" onclick="deleteCard(this)">删除</button>
-                    </div>
                     <div class="exp-header"><div class="exp-title">教育背景</div></div>
-                    <div style="margin-top: 15px;">
-                        <p contenteditable="true"><strong>香港中文大学</strong> | 社会学研究 | 2026.09-2027.07</p>
-                        <p contenteditable="true"><strong>华南师范大学</strong> | 网络与新媒体 | 2022.09-2026.07</p>
-                        <p contenteditable="true" style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 10px; border-top: 1px solid #eee; padding-top: 10px;">
-                            GPA: 3.96/5.0 | “互联网+”省级二等奖 | 校级优秀学生干部
-                        </p>
+                    <div style="margin-top: 20px;">
+                        <div style="margin-bottom: 16px;">
+                            <p style="font-weight: 600; margin-bottom: 4px;">香港中文大学</p>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 4px;">社会学研究生 | 2026.09 - 2027.07</p>
+                        </div>
+                        <div style="margin-bottom: 16px;">
+                            <p style="font-weight: 600; margin-bottom: 4px;">华南师范大学</p>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 4px;">网络与新媒体 · 本科 | 2022.09 - 2026.07</p>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">GPA: 3.89/5.0 | "互联网+"省级二等奖 | 校级优秀学生干部 | 校级优秀奖学金</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -297,21 +227,46 @@
 
     <section id="intern">
         <div class="reveal-content">
-            <h2 class="section-header" contenteditable="true">实习经历</h2>
+            <h2 class="section-header">实习经历</h2>
             <div class="list-container">
                 <div class="card">
-                    <div class="card-actions">
-                        <span class="drag-handle" title="拖动调整顺序">⋮</span>
-                        <button class="btn-action btn-del" onclick="deleteCard(this)">删除</button>
-                    </div>
                     <div class="exp-header">
-                        <div class="exp-title" contenteditable="true">网易 - 国际广告产品部</div>
-                        <div class="exp-date" contenteditable="true">2025.07 - 2025.11</div>
+                        <div class="exp-title">网易 · 国际广告产品部</div>
+                        <div class="exp-date">2025.07 - 2025.11</div>
                     </div>
-                    <div class="exp-sub" contenteditable="true">海外市场运营实习生</div>
-                    <ul class="bullet-list" contenteditable="true">
-                        <li>成功签约30+本土达人，流程优化使成功率由44%升至92%；</li>
-                        <li>策划并交付第五人格官号视频，最高播放量670w+。</li>
+                    <div class="exp-sub">海外市场运营实习生</div>
+                    <ul class="bullet-list">
+                        <li><strong>达人拓展：</strong>拓展 30+ MCN，筛选 1000+ 达人，成功签约 30+ 位本土达人及 1 位日本女星；通过优化合作流程，将成功率由 44% 提升至 82%</li>
+                        <li><strong>内容策划：</strong>分析日本、欧美及中东用户偏好，输出 30+ 脚本；策划第五人格官号视频，单条最高播放量达 670w+，点赞 12.9k</li>
+                        <li><strong>海外推广：</strong>支持荒野行动、逆水寒等产品在欧美、东南亚推广，参与素材方向梳理与达人合作，项目 ROI 均达 1.4</li>
+                        <li><strong>部门协同：</strong>对接策划、商务、剪辑及海外 MCN，推进项目从提报到交付，沉淀达人合作与素材交付 SOP</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="exp-header">
+                        <div class="exp-title">广东广播电视台 · 民生频道</div>
+                        <div class="exp-date">2024.06 - 2024.10</div>
+                    </div>
+                    <div class="exp-sub">新媒体运营</div>
+                    <ul class="bullet-list">
+                        <li><strong>账号运营：</strong>负责视频号日常运营，独立撰写 18 个拍摄脚本；结合用户需求迭代增粉策略，推动粉丝增长 1w+</li>
+                        <li><strong>用户运营：</strong>搭建万人嘉宾库，使用 Excel 函数对嘉宾进行标签化整理与分层筛选，支持直播邀约及活动匹配</li>
+                        <li><strong>直播运营：</strong>策划并主持 30+ 场直播，单场热度峰值达 4w+，创下 2024 年上半年最高纪录</li>
+                        <li><strong>活动执行：</strong>推进线下活动落地实现 88 人付费转化；制定红色文旅项目方案，吸引 100+ 人报名，转化率达 82%</li>
+                        <li><strong>团队管理：</strong>管理 5+ 实习生的招聘和培训，优化招聘流程</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="exp-header">
+                        <div class="exp-title">美澳石材有限公司 · 外贸部</div>
+                        <div class="exp-date">2023.07 - 2023.09</div>
+                    </div>
+                    <div class="exp-sub">跨境商务运营</div>
+                    <ul class="bullet-list">
+                        <li><strong>市场挖掘：</strong>通过 LinkedIn、Facebook、Google Maps 等渠道挖掘马来西亚潜在经销商，搭建线索库并分类；整理询盘信息清单</li>
+                        <li><strong>展会宣传：</strong>整理中英文宣传物料，配合展会前准备与会后客户信息归档</li>
+                        <li><strong>订单跟进：</strong>协助客户需求确认与订单资料整理，配合工厂与物流节点更新</li>
+                        <li><strong>业务协同：</strong>理解产品供应、客户需求与交付节奏的关系，强化商务运营与跨部门沟通能力</li>
                     </ul>
                 </div>
             </div>
@@ -320,20 +275,29 @@
 
     <section id="practice">
         <div class="reveal-content">
-            <h2 class="section-header" contenteditable="true">实践经历</h2>
+            <h2 class="section-header">实践经历</h2>
             <div class="list-container">
                 <div class="card">
-                    <div class="card-actions">
-                        <span class="drag-handle" title="拖动调整顺序">⋮</span>
-                        <button class="btn-action btn-del" onclick="deleteCard(this)">删除</button>
-                    </div>
                     <div class="exp-header">
-                        <div class="exp-title" contenteditable="true">酷爱睿思团队</div>
-                        <div class="exp-date" contenteditable="true">2023.10 - 2024.10</div>
+                        <div class="exp-title">"互联网+"省级银奖 · 核心成员</div>
+                        <div class="exp-date">2024.06 - 2024.10</div>
                     </div>
-                    <div class="exp-sub" contenteditable="true">核心企划组 · 运营</div>
-                    <ul class="bullet-list" contenteditable="true">
-                        <li>公众号运营：一年内推动粉丝增长2000+，总阅读量达4.4w+。</li>
+                    <ul class="bullet-list">
+                        <li><strong>视觉设计：</strong>使用 Photoshop、Canva、PowerPoint 优化项目 PPT 与宣传物料；用 PR、AE 剪辑宣传视频</li>
+                        <li><strong>内容梳理：</strong>参与项目材料结构梳理与表达优化，使用 Napkin 制作数据可视化图表，助力获得省级奖项</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="exp-header">
+                        <div class="exp-title">酷爱睿思团队 · 核心企划组</div>
+                        <div class="exp-date">2023.10 - 2024.10</div>
+                    </div>
+                    <div class="exp-sub">运营</div>
+                    <ul class="bullet-list">
+                        <li><strong>公众号运营：</strong>推动粉丝增长 2000+，总阅读量达 44610+，发布 65 篇推文</li>
+                        <li><strong>内容创作：</strong>独立撰写并发布 3 篇推文，单篇最高浏览量达 7000+；设计 30+ 张活动海报</li>
+                        <li><strong>活动策划：</strong>作为"噪音计划"主持人，策划活动、对接嘉宾、负责宣传，参与人数达 100+ 人次</li>
+                        <li><strong>社群运营：</strong>定期组织 30+ 人线上讨论会议，维系高粘度社群</li>
                     </ul>
                 </div>
             </div>
@@ -342,20 +306,30 @@
 
     <section id="campus">
         <div class="reveal-content">
-            <h2 class="section-header" contenteditable="true">校园经历</h2>
+            <h2 class="section-header">校园经历</h2>
             <div class="list-container">
                 <div class="card">
-                    <div class="card-actions">
-                        <span class="drag-handle" title="拖动调整顺序">⋮</span>
-                        <button class="btn-action btn-del" onclick="deleteCard(this)">删除</button>
-                    </div>
                     <div class="exp-header">
-                        <div class="exp-title" contenteditable="true">学院融媒体中心</div>
-                        <div class="exp-date" contenteditable="true">2023.10 - 2024.09</div>
+                        <div class="exp-title">学院融媒体中心</div>
+                        <div class="exp-date">2023.10 - 2024.09</div>
                     </div>
-                    <div class="exp-sub" contenteditable="true">负责人</div>
-                    <ul class="bullet-list" contenteditable="true">
-                        <li>主导栏目选题方向，审核30+篇推文，统筹学院大型活动宣传。</li>
+                    <div class="exp-sub">负责人</div>
+                    <ul class="bullet-list">
+                        <li><strong>选题策划：</strong>主导栏目选题方向制定，完成 30+ 篇推文的审核与把控</li>
+                        <li><strong>活动宣传：</strong>参与体育艺术节等大型活动宣传策划，统筹视频拍摄、剪辑与推文</li>
+                        <li><strong>部门协调：</strong>协调 10+ 社团资源，完成学院音乐节、中秋晚会、迎新晚会等大型活动</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="exp-header">
+                        <div class="exp-title">国际商学院</div>
+                        <div class="exp-date">2022.10 - 2023.09</div>
+                    </div>
+                    <div class="exp-sub">年级级委</div>
+                    <ul class="bullet-list">
+                        <li><strong>活动组织：</strong>参与年级大型活动策划与执行，累计组织 10+ 次 300+ 人次参与的活动</li>
+                        <li><strong>活动统筹：</strong>负责人员安排、部门协作、物资采买等工作</li>
+                        <li><strong>沟通协调：</strong>对接教师与行政部门，服务 260+ 名学生</li>
                     </ul>
                 </div>
             </div>
@@ -364,20 +338,29 @@
 
     <section id="research">
         <div class="reveal-content">
-            <h2 class="section-header" contenteditable="true">科研经历</h2>
+            <h2 class="section-header">科研经历</h2>
             <div class="list-container">
                 <div class="card">
-                    <div class="card-actions">
-                        <span class="drag-handle" title="拖动调整顺序">⋮</span>
-                        <button class="btn-action btn-del" onclick="deleteCard(this)">删除</button>
-                    </div>
                     <div class="exp-header">
-                        <div class="exp-title" contenteditable="true">大学生创业计划竞赛</div>
-                        <div class="exp-date" contenteditable="true">2024.05 - 2024.09</div>
+                        <div class="exp-title">大学生创业计划竞赛</div>
+                        <div class="exp-date">2024.05 - 2024.09</div>
                     </div>
-                    <div class="exp-sub" contenteditable="true">营销负责人</div>
-                    <ul class="bullet-list" contenteditable="true">
-                        <li>负责项目结构梳理与可视化优化，助力获得省级奖项。</li>
+                    <div class="exp-sub">团队营销负责人</div>
+                    <ul class="bullet-list">
+                        <li><strong>营销策划：</strong>基于 PEST 法则分析市场，设计数字化宣传与达人联动方案</li>
+                        <li><strong>视觉策划：</strong>撰写小程序产品需求文档，设计 UI 页面</li>
+                        <li><strong>传播成效：</strong>项目被 30+ 家媒体报道，获评地方示范性品牌项目</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="exp-header">
+                        <div class="exp-title">高层次国际化人才培养创新实践项目</div>
+                        <div class="exp-date">2022.11 - 2024.06</div>
+                    </div>
+                    <div class="exp-sub">学生</div>
+                    <ul class="bullet-list">
+                        <li><strong>全球治理证书：</strong>修完四门全球治理课程并通过考核，获取教育部中外人文交流中心证书</li>
+                        <li><strong>主修课程：</strong>整合营销传播、结构化面试技巧、可持续发展与社会心理健康、全球视角下的性别关系</li>
                     </ul>
                 </div>
             </div>
@@ -386,16 +369,14 @@
 
     <section id="skills">
         <div class="reveal-content">
-            <h2 class="section-header" contenteditable="true">技能奖项</h2>
+            <h2 class="section-header">技能特长</h2>
             <div class="list-container">
-                <div class="card" contenteditable="true">
-                    <div class="card-actions">
-                        <span class="drag-handle" title="拖动调整顺序">⋮</span>
-                        <button class="btn-action btn-del" onclick="deleteCard(this)">删除</button>
-                    </div>
-                    <p style="margin-bottom: 12px;"><strong>语言能力：</strong>雅思 7.0 / CET-6 583 / 粤语(母语)</p>
-                    <p style="margin-bottom: 12px;"><strong>数据分析：</strong>Excel, SQL, Power BI, SPSS</p>
-                    <p><strong>专业工具：</strong>Adobe Ps/Pr/Ae, Figma, AI Prompting</p>
+                <div class="card">
+                    <p style="margin-bottom: 12px;"><strong>语言能力：</strong>雅思 7，CET-6 583，粤语母语，法语入门</p>
+                    <p style="margin-bottom: 12px;"><strong>数据分析：</strong>Excel 函数（VLOOKUP 等）、SPSS、Power BI、Tableau</p>
+                    <p style="margin-bottom: 12px;"><strong>AI 工具：</strong>精通 Claude、GPT、Gemini；熟悉 Prompt 设计与 Skill 拆解；熟练使用 Cursor、OpenCode；熟悉 Nano Banana、Sora 等素材生成工具</p>
+                    <p style="margin-bottom: 12px;"><strong>内容创作：</strong>Photoshop、剪映、Premiere Pro、Audition、After Effects、Figma、秀米等；发布的单条视频获 10w+ 互动曝光</p>
+                    <p><strong>新媒体运营：</strong>重度社交用户，熟悉小红书、抖音、Bilibili、Instagram、Discord、Reddit、X 等平台生态与用户偏好</p>
                 </div>
             </div>
         </div>
@@ -403,36 +384,34 @@
 
     <section id="portfolio">
         <div class="reveal-content">
-            <h2 class="section-header" contenteditable="true">作品集附录</h2>
+            <h2 class="section-header">作品集</h2>
             <div class="portfolio-grid list-container">
-                <div class="card portfolio-card" onclick="triggerFileUpload(this)">
-                    <div class="card-actions">
-                        <span class="drag-handle" title="拖动调整顺序">⋮</span>
-                        <button class="btn-action btn-del" onclick="deleteCard(this)">删除</button>
+                <div class="card portfolio-card" style="background: rgba(255, 255, 255, 0.85); display: flex; flex-direction: column; justify-content: flex-start;">
+                    <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                        <i data-lucide="file-pdf" size="40" style="color:var(--primary-accent); margin-right: 12px;"></i>
+                        <div>
+                            <h4 style="margin: 0; font-weight: 600; margin-bottom: 4px;">个人作品集</h4>
+                            <p style="font-size: 12px; color: var(--text-secondary); margin: 0;">Portfolio & Case Studies</p>
+                        </div>
                     </div>
-                    <i data-lucide="file-text" size="40" style="color:var(--primary-accent)"></i>
-                    <div>
-                        <h4 contenteditable="true">个人作品集.pdf</h4>
-                        <p style="font-size: 12px; color: var(--text-secondary); margin-top: 5px;">点击上传附件</p>
+                    <a href="assets/files/portfolio.pdf" target="_blank" style="display: inline-block; padding: 8px 16px; background: var(--primary-accent); color: white; border-radius: 12px; text-decoration: none; font-size: 13px; font-weight: 500; margin-top: 8px; transition: 0.3s;">查看作品集 PDF →</a>
+                </div>
+                <div class="card portfolio-card" style="background: rgba(255, 255, 255, 0.85); display: flex; flex-direction: column; justify-content: flex-start;">
+                    <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                        <i data-lucide="file-text" size="40" style="color:var(--primary-accent); margin-right: 12px;"></i>
+                        <div>
+                            <h4 style="margin: 0; font-weight: 600; margin-bottom: 4px;">个人简历</h4>
+                            <p style="font-size: 12px; color: var(--text-secondary); margin: 0;">Resume & CV</p>
+                        </div>
                     </div>
-                    <input type="file" hidden class="port-upload" onchange="handlePortFile(this)">
+                    <a href="assets/files/resume.pdf" target="_blank" style="display: inline-block; padding: 8px 16px; background: var(--primary-accent); color: white; border-radius: 12px; text-decoration: none; font-size: 13px; font-weight: 500; margin-top: 8px; transition: 0.3s;">下载简历 PDF →</a>
                 </div>
             </div>
         </div>
     </section>
 </main>
 
-<div class="admin-controls">
-    <div style="font-size: 12px; color: #86868b; font-weight: 500;">沉浸式简历管理</div>
-    <div class="text-controls">
-        <label for="edit-font-size">字体大小</label>
-        <input id="edit-font-size" type="number" min="10" max="48" value="16">
-        <button class="btn-action" onclick="applyFontSize()">应用</button>
-    </div>
-    <button class="btn-plus" onclick="addCard()">+ 增加此板块卡片</button>
-</div>
 
-<div id="status-toast">已同步存储</div>
 
 <script>
     lucide.createIcons();
@@ -449,16 +428,6 @@
 
     document.querySelectorAll('section').forEach(section => observer.observe(section));
 
-    let dragSourceCard = null;
-    let currentEditableElement = null;
-
-    document.body.addEventListener('focusin', (event) => {
-        if (event.target.isContentEditable) {
-            currentEditableElement = event.target;
-            updateFontSizeInput(event.target);
-        }
-    });
-
     function updateNavActive(id) {
         navLinks.forEach(link => {
             link.classList.toggle('active', link.getAttribute('id') === 'n-' + id);
@@ -468,235 +437,6 @@
     function scrollToSection(id) {
         document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
     }
-
-    function getCurrentSection() {
-        const sections = document.querySelectorAll('section');
-        let current = sections[0];
-        let minDiff = Infinity;
-        const viewportCenter = window.innerHeight / 2;
-
-        sections.forEach(section => {
-            const rect = section.getBoundingClientRect();
-            const sectionCenter = rect.top + rect.height / 2;
-            const diff = Math.abs(viewportCenter - sectionCenter);
-            if (diff < minDiff) {
-                minDiff = diff;
-                current = section;
-            }
-        });
-        return current;
-    }
-
-    function addCard() {
-        const activeSection = getCurrentSection();
-        const container = activeSection.querySelector('.list-container');
-        if (!container) return showToast("当前位置不支持增加列表");
-
-        const newCard = document.createElement('div');
-        newCard.className = 'card';
-
-        if (activeSection.id === 'portfolio') {
-            newCard.className = 'card portfolio-card';
-            newCard.onclick = function() { triggerFileUpload(this); };
-            newCard.innerHTML = `
-                <div class="card-actions">
-                    <span class="drag-handle" title="拖动调整顺序">⋮</span>
-                    <button class="btn-action btn-del" onclick="deleteCard(this)">删除</button>
-                </div>
-                <i data-lucide="video" size="40" style="color:var(--primary-accent)"></i>
-                <div>
-                    <h4 contenteditable="true">新作品标题</h4>
-                    <p style="font-size: 12px; color: var(--text-secondary); margin-top: 5px;">点击上传附件</p>
-                </div>
-                <input type="file" hidden class="port-upload" onchange="handlePortFile(this)">
-            `;
-        } else {
-            newCard.innerHTML = `
-                <div class="card-actions">
-                    <span class="drag-handle" title="拖动调整顺序">⋮</span>
-                    <button class="btn-action btn-del" onclick="deleteCard(this)">删除</button>
-                </div>
-                <div class="exp-header">
-                    <div class="exp-title" contenteditable="true">新增项目/名称</div>
-                    <div class="exp-date" contenteditable="true">2024.xx - 2024.xx</div>
-                </div>
-                <div class="exp-sub" contenteditable="true">职位/角色</div>
-                <ul class="bullet-list" contenteditable="true">
-                    <li>输入具体的工作内容与量化成果...</li>
-                </ul>
-            `;
-        }
-
-        container.appendChild(newCard);
-        setupDraggableCards();
-        lucide.createIcons();
-        autoSave();
-        showToast("已添加新内容");
-    }
-
-    function processPhoto(input) {
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const img = document.getElementById('avatar-img');
-                img.src = e.target.result;
-                img.style.display = 'block';
-                document.getElementById('upload-hint').style.display = 'none';
-                autoSave();
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-    function triggerFileUpload(el) {
-        el.querySelector('.port-upload').click();
-    }
-
-    function handlePortFile(input) {
-        if (input.files && input.files[0]) {
-            input.parentElement.querySelector('h4').innerText = input.files[0].name;
-            autoSave();
-        }
-    }
-
-    function deleteCard(btn) {
-        if (confirm("确定删除此项内容吗？")) {
-            const card = btn.closest('.card');
-            card.remove();
-            autoSave();
-        }
-    }
-
-    function applyFontSize() {
-        const sizeInput = document.getElementById('edit-font-size');
-        const size = parseInt(sizeInput.value, 10);
-        if (!size || size < 10 || size > 48) return showToast("请输入 10-48 的字体大小");
-        const target = currentEditableElement || getCurrentSection().querySelector('.list-container');
-        if (!target) return showToast("请先选择一个可编辑文本区域");
-        target.style.fontSize = `${size}px`;
-        showToast(`已设置字体大小为 ${size}px`);
-        autoSave();
-    }
-
-    function updateFontSizeInput(el) {
-        const size = window.getComputedStyle(el).fontSize;
-        document.getElementById('edit-font-size').value = parseInt(size, 10);
-    }
-
-    function autoSave() {
-        const data = {
-            html: document.getElementById('main-content').innerHTML,
-            photo: document.getElementById('avatar-img').src
-        };
-        localStorage.setItem('felicia_final_v3', JSON.stringify(data));
-        showToast("已自动保存");
-    }
-
-    function showToast(msg) {
-        const toast = document.getElementById('status-toast');
-        toast.innerText = msg;
-        toast.style.opacity = "1";
-        setTimeout(() => toast.style.opacity = "0", 1500);
-    }
-
-    function setupDraggableCards() {
-        document.querySelectorAll('.card').forEach(card => {
-            const actions = card.querySelector('.card-actions');
-            if (!actions) return;
-            let handle = actions.querySelector('.drag-handle');
-            if (!handle) {
-                handle = document.createElement('span');
-                handle.className = 'drag-handle';
-                handle.title = '拖动调整顺序';
-                handle.textContent = '⋮';
-                actions.insertBefore(handle, actions.firstChild);
-            }
-            handle.draggable = true;
-            handle.removeEventListener('dragstart', handleDragStart);
-            handle.addEventListener('dragstart', handleDragStart);
-            handle.removeEventListener('dragend', handleDragEnd);
-            handle.addEventListener('dragend', handleDragEnd);
-        });
-
-        document.querySelectorAll('.list-container, .portfolio-grid').forEach(container => {
-            container.removeEventListener('dragover', handleDragOver);
-            container.removeEventListener('drop', handleDrop);
-            container.addEventListener('dragover', handleDragOver);
-            container.addEventListener('drop', handleDrop);
-        });
-    }
-
-    function handleDragStart(e) {
-        dragSourceCard = this.closest('.card');
-        if (!dragSourceCard) return;
-        dragSourceCard.classList.add('dragging');
-        e.dataTransfer.effectAllowed = 'move';
-        e.dataTransfer.setData('text/plain', 'dragcard');
-    }
-
-    function handleDragEnd() {
-        if (dragSourceCard) dragSourceCard.classList.remove('dragging');
-        dragSourceCard = null;
-    }
-
-    function handleDragOver(e) {
-        e.preventDefault();
-        this.classList.add('drag-over');
-        const dragging = dragSourceCard;
-        if (!dragging) return;
-        const afterElement = getDragAfterElement(this, e.clientY);
-        if (afterElement == null) {
-            this.appendChild(dragging);
-        } else {
-            this.insertBefore(dragging, afterElement);
-        }
-    }
-
-    function handleDrop(e) {
-        e.preventDefault();
-        this.classList.remove('drag-over');
-        if (dragSourceCard) {
-            dragSourceCard.classList.remove('dragging');
-            autoSave();
-        }
-    }
-
-    function getDragAfterElement(container, y) {
-        const draggableElements = [...container.querySelectorAll('.card:not(.dragging)')];
-        return draggableElements.reduce((closest, child) => {
-            const box = child.getBoundingClientRect();
-            const offset = y - box.top - box.height / 2;
-            if (offset < 0 && offset > closest.offset) {
-                return { offset, element: child };
-            } else {
-                return closest;
-            }
-        }, { offset: Number.NEGATIVE_INFINITY }).element;
-    }
-
-    document.getElementById('main-content').addEventListener('input', () => {
-        clearTimeout(window.saveTimer);
-        window.saveTimer = setTimeout(autoSave, 1000);
-    });
-
-    window.onload = () => {
-        const saved = localStorage.getItem('felicia_final_v3');
-        if (saved) {
-            const d = JSON.parse(saved);
-            document.getElementById('main-content').innerHTML = d.html;
-            if (d.photo && d.photo.length > 100) {
-                const img = document.getElementById('avatar-img');
-                img.src = d.photo;
-                img.style.display = 'block';
-                document.getElementById('upload-hint').style.display = 'none';
-            }
-            lucide.createIcons();
-            document.querySelectorAll('section').forEach(s => observer.observe(s));
-            setupDraggableCards();
-        } else {
-            setupDraggableCards();
-        }
-    };
 </script>
 </body>
 </html>
